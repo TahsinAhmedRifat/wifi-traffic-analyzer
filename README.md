@@ -42,7 +42,7 @@ wifi-traffic-analyzer/
 ├── README.md            # Project description and dashboard documentation
 ├── screenshots/         # Screenshots of Splunk dashboard panels
 ├── network_logs.csv     # CSV data for network logs and queries
-└── dashboards/          # Optional: exported dashboard XML/JSON
+└── dashboards/          # Optional: exported dashboard XML
     └── my_dashboard.xml
 ```
 
