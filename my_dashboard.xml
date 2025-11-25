@@ -1,0 +1,179 @@
+
+<dashboard version="1.1" theme="light">
+  <label>Wi-Fi Traffic Analysis</label>
+  <description>Shows the count of packets per protocol to visualize the most common traffic types on the Wi-Fi network</description>
+  <row>
+    <panel>
+      <title>Protocol Distribution</title>
+      <chart>
+        <search>
+          <query>source="network_logs.csv.csv" host="DESKTOP-LHRV0RB" sourcetype="network_logs"
+| stats count by Protocol
+| sort -count</query>
+          <earliest>0</earliest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="charting.chart">pie</option>
+        <option name="charting.drilldown">none</option>
+      </chart>
+    </panel>
+    <panel>
+      <title>Packet Size Distribution</title>
+      <chart>
+        <search>
+          <query>source="network_logs.csv.csv" host="DESKTOP-LHRV0RB" sourcetype="network_logs"
+| stats count by Length
+| sort -count</query>
+          <earliest>0</earliest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="charting.chart">pie</option>
+        <option name="charting.drilldown">none</option>
+      </chart>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <title>Traffic Over Time</title>
+      <table>
+        <search>
+          <query>source="network_logs.csv.csv" host="DESKTOP-LHRV0RB" sourcetype="network_logs"
+| timechart span=1m count</query>
+          <earliest>0</earliest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="count">20</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">none</option>
+        <option name="percentagesRow">false</option>
+        <option name="rowNumbers">false</option>
+        <option name="totalsRow">false</option>
+        <option name="wrap">true</option>
+      </table>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <title>Top Destination Devices</title>
+      <chart>
+        <search>
+          <query>source="network_logs.csv.csv" host="DESKTOP-LHRV0RB" sourcetype="network_logs"
+| stats count by Destination
+| sort -count
+| head 20</query>
+          <earliest>0</earliest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="charting.chart">bar</option>
+        <option name="charting.drilldown">none</option>
+      </chart>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <title>Packet Count by Minute per Protocol</title>
+      <event>
+        <search>
+          <query>source="network_logs.csv.csv" host="DESKTOP-LHRV0RB" sourcetype="network_logs"
+| timechart span=1m count by Protocol</query>
+          <earliest>0</earliest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="list.drilldown">none</option>
+      </event>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <title>Peak Traffic Hours</title>
+      <chart>
+        <search>
+          <query>source="network_logs.csv.csv" host="DESKTOP-LHRV0RB" sourcetype="network_logs"
+| timechart span=1h count</query>
+          <earliest>0</earliest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="charting.chart">line</option>
+        <option name="charting.drilldown">none</option>
+      </chart>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <title>Packet Size Over Time</title>
+      <table>
+        <search>
+          <query>source="network_logs.csv.csv" host="DESKTOP-LHRV0RB" sourcetype="network_logs"
+| timechart span=1m avg(Length) as AvgPacketSize</query>
+          <earliest>0</earliest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="count">20</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">none</option>
+        <option name="percentagesRow">false</option>
+        <option name="rowNumbers">false</option>
+        <option name="totalsRow">false</option>
+        <option name="wrap">true</option>
+      </table>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <title>ARP Request/Reply Ratio</title>
+      <chart>
+        <search>
+          <query>source="network_logs.csv.csv" host="DESKTOP-LHRV0RB" sourcetype="network_logs"
+| search Protocol="ARP"
+| eval Type=if(like(Info,"%Who has%"),"Request","Reply")
+| stats count by Type</query>
+          <earliest>0</earliest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="charting.chart">column</option>
+        <option name="charting.drilldown">none</option>
+      </chart>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <title>Unusual Protocols</title>
+      <table>
+        <search>
+          <query>source="network_logs.csv.csv" host="DESKTOP-LHRV0RB" sourcetype="network_logs"
+| stats count by Protocol
+| where count &lt; 5</query>
+          <earliest>0</earliest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="count">20</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">none</option>
+        <option name="percentagesRow">false</option>
+        <option name="rowNumbers">false</option>
+        <option name="totalsRow">false</option>
+        <option name="wrap">true</option>
+      </table>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <title>Protocol Trend Over Time</title>
+      <table>
+        <search>
+          <query>source="network_logs.csv.csv" host="DESKTOP-LHRV0RB" sourcetype="network_logs"
+| timechart span=1m count by Protocol</query>
+          <earliest>0</earliest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="count">20</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">none</option>
+        <option name="percentagesRow">false</option>
+        <option name="rowNumbers">false</option>
+        <option name="totalsRow">false</option>
+        <option name="wrap">true</option>
+      </table>
+    </panel>
+  </row>
+</dashboard>
