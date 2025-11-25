@@ -39,3 +39,27 @@ This project visualizes Wi-Fi network traffic captured via Wireshark and importe
 
 ## Project Structure
 
+wifi-traffic-analyzer/
+├── README.md # Project description and dashboard documentation
+├── screenshots/ # Screenshots of Splunk dashboard panels
+├── queries/ # CSV and Splunk queries for each panel
+│ └── network_logs.csv
+└── dashboards/ # Optional: exported dashboard XML/JSON
+└── my_dashboard.xml
+
+---
+
+## Usage
+
+1. Open **Splunk** and create a new dashboard.  
+2. Import `network_logs.csv` into Splunk as a data source.  
+3. Recreate panels using the queries provided in the `queries/` folder.  
+4. (Optional) Import exported dashboard XML/JSON from `dashboards/` folder.  
+
+---
+
+## Author
+
+**TahsinAhmedRifat**  
+- Email: rifat3387b@gmail.com  
+- GitHub: [https://github.com/TahsinAhmedRifat](https://github.com/TahsinAhmedRifat)
