@@ -35,18 +35,16 @@ This project visualizes Wi-Fi network traffic captured via Wireshark and importe
 ### Protocol Trend & ARP Request/Reply Ratio
 <img width="1917" height="1077" alt="Screenshot 4" src="https://github.com/user-attachments/assets/54778e55-1386-4dc4-8944-63646f3fedfd" />
 
----
-
 ## Project Structure
 
+```
 wifi-traffic-analyzer/
-├── README.md                 # Project description and dashboard documentation
-├── screenshots/              # Screenshots of Splunk dashboard panels
-├── network_logs.csv                  # CSV and Splunk queries for each panel
-└── dashboards/               # Optional: exported dashboard XML/JSON
+├── README.md            # Project description and dashboard documentation
+├── screenshots/         # Screenshots of Splunk dashboard panels
+├── network_logs.csv     # CSV data for network logs and queries
+└── dashboards/          # Optional: exported dashboard XML/JSON
     └── my_dashboard.xml
-
----
+```
 
 ## Usage
 
